@@ -1,13 +1,13 @@
 import styles from "./CountryList.module.css";
 import Spinner from "./Spinner";
 
-import type { City } from "../types";
+import type { TCity } from "../types";
 import CountryItem from "./CountryItem";
 import Message from "./Message";
 
 type CountryListPops = {
   isLoading: boolean;
-  cities: City[];
+  cities: TCity[];
 };
 
 function CountryList({ cities, isLoading }: CountryListPops) {
@@ -24,9 +24,7 @@ function CountryList({ cities, isLoading }: CountryListPops) {
       });
     }
     return acc;
-  }, [] as { name: string; id: number; emoji: string }[]);
-
-  console.log(uniqueCountries);
+  }, [] as { name: string; id: string; emoji: string }[]);
 
   return (
     <ul className={styles.countryList}>

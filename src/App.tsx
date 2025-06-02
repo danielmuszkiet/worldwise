@@ -9,13 +9,14 @@ import Login from "./pages/Login";
 import AppLayout from "./pages/AppLayout";
 import CityList from "./components/CityList";
 import CountryList from "./components/CountryList";
+import City from "./components/City";
 
-import type { City } from "./types";
+import type { TCity } from "./types";
 
 const BASE_URL = "http://localhost:8000";
 
 function App() {
-  const [cities, setCities] = useState<City[]>([]);
+  const [cities, setCities] = useState<TCity[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -46,8 +47,12 @@ function App() {
 
         <Route path="app" element={<AppLayout />}>
           <Route index element={<CityList cities={cities} isLoading={isLoading} />} />
+
           <Route path="cities" element={<CityList cities={cities} isLoading={isLoading} />} />
+          <Route path="cities/:id" element={<City cities={cities} />} />
+
           <Route path="countries" element={<CountryList cities={cities} isLoading={isLoading} />} />
+
           <Route path="form" element={<p>Form</p>} />
         </Route>
 

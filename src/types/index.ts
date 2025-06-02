@@ -1,4 +1,4 @@
-export type City = {
+export type TCity = {
   cityName: string;
   country: string;
   emoji: string;
@@ -8,5 +8,5 @@ export type City = {
     lat: number;
     lon: number;
   };
-  id: number;
+  id: string;
 };

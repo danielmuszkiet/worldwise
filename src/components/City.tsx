@@ -1,4 +1,12 @@
+import { useParams } from "react-router";
+
+import type { TCity } from "../types";
 import styles from "./City.module.css";
+import CountryImage from "./CountryImage";
+
+type CityProps = {
+  cities: TCity[];
+};
 
 const formatDate = (date: string) =>
   new Intl.DateTimeFormat("en", {
@@ -8,23 +16,21 @@ const formatDate = (date: string) =>
     weekday: "long",
   }).format(new Date(date));
 
-function City() {
-  // TEMP DATA
-  const currentCity = {
-    cityName: "Lisbon",
-    emoji: "🇵🇹",
-    date: "2027-10-31T15:59:59.138Z",
-    notes: "My favorite city so far!",
-  };
+function City({ cities }: CityProps) {
+  const { id } = useParams();
+  const pickedCity = cities.filter((c) => c.id === id)[0];
 
-  const { cityName, emoji, date, notes } = currentCity;
+  const { cityName, emoji, date, notes, country } = pickedCity;
 
   return (
     <div className={styles.city}>
       <div className={styles.row}>
         <h6>City name</h6>
         <h3>
-          <span>{emoji}</span> {cityName}
+          <span>
+            <CountryImage countrycode={emoji} size="h24" name={country} />
+          </span>
+          {cityName}
         </h3>
       </div>
 

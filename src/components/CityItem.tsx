@@ -1,9 +1,12 @@
+import CountryImage from "./CountryImage";
+
 import styles from "./CityItem.module.css";
 
-import type { City } from "../types";
+import type { TCity } from "../types";
+import { Link } from "react-router";
 
 type CityItem = {
-  city: City;
+  city: TCity;
 };
 
 const formatDate = (date: string) =>
@@ -14,14 +17,18 @@ const formatDate = (date: string) =>
   }).format(new Date(date));
 
 function CityItem({ city }: CityItem) {
-  const { emoji, cityName, date } = city;
+  const { emoji, cityName, date, id, country } = city;
 
   return (
-    <li className={styles.cityItem}>
-      <span className={styles.emoji}>{emoji}</span>
-      <h3 className={styles.name}>{cityName}</h3>
-      <time className={styles.date}>({formatDate(date)})</time>
-      <button className={styles.deleteBtn}>&times;</button>
+    <li>
+      <Link to={`${id}`} className={styles.cityItem}>
+        <span className={styles.emoji}>
+          <CountryImage countrycode={emoji} size="h20" name={country} />
+        </span>
+        <h3 className={styles.name}>{cityName}</h3>
+        <time className={styles.date}>({formatDate(date)})</time>
+        <button className={styles.deleteBtn}>&times;</button>
+      </Link>
     </li>
   );
 }

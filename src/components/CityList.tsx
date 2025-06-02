@@ -1,13 +1,13 @@
 import styles from "./CityList.module.css";
 import Spinner from "./Spinner";
 
-import type { City } from "../types";
+import type { TCity } from "../types";
 import CityItem from "./CityItem";
 import Message from "./Message";
 
 type CityListProps = {
   isLoading: boolean;
-  cities: City[];
+  cities: TCity[];
 };
 
 function CityList({ cities, isLoading }: CityListProps) {

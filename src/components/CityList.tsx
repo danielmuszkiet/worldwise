@@ -1,16 +1,14 @@
-import styles from "./CityList.module.css";
-import Spinner from "./Spinner";
+import { useCities } from "../contexts/useCities";
 
-import type { TCity } from "../types";
+import styles from "./CityList.module.css";
+
+import Spinner from "./Spinner";
 import CityItem from "./CityItem";
 import Message from "./Message";
 
-type CityListProps = {
-  isLoading: boolean;
-  cities: TCity[];
-};
+function CityList() {
+  const { cities, isLoading } = useCities();
 
-function CityList({ cities, isLoading }: CityListProps) {
   if (isLoading) return <Spinner />;
 
   if (!cities.length) return <Message message="Add your first city by clicking one on the map" />;

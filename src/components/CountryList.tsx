@@ -1,16 +1,12 @@
 import styles from "./CountryList.module.css";
 import Spinner from "./Spinner";
 
-import type { TCity } from "../types";
 import CountryItem from "./CountryItem";
 import Message from "./Message";
+import { useCities } from "../contexts/useCities";
 
-type CountryListPops = {
-  isLoading: boolean;
-  cities: TCity[];
-};
-
-function CountryList({ cities, isLoading }: CountryListPops) {
+function CountryList() {
+  const { cities, isLoading } = useCities();
   if (isLoading) return <Spinner />;
 
   if (!cities.length) return <Message message="Add your first city by clicking one on the map" />;

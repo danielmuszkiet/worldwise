@@ -1,12 +1,8 @@
 import { useParams } from "react-router";
 
-import type { TCity } from "../types";
 import styles from "./City.module.css";
 import CountryImage from "./CountryImage";
-
-type CityProps = {
-  cities: TCity[];
-};
+import { useCities } from "../contexts/useCities";
 
 const formatDate = (date: string) =>
   new Intl.DateTimeFormat("en", {
@@ -16,7 +12,9 @@ const formatDate = (date: string) =>
     weekday: "long",
   }).format(new Date(date));
 
-function City({ cities }: CityProps) {
+function City() {
+  const { cities } = useCities();
+
   const { id } = useParams();
   const pickedCity = cities.filter((c) => c.id === id)[0];
 

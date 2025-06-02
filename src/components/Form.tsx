@@ -47,7 +47,7 @@ function Form() {
       <div className={styles.buttons}>
         <Button children="Add" type="primary" />
         <Button
-          children="🠔 Back"
+          children="< Back"
           type="back"
           onClick={(e) => {
             e.preventDefault();

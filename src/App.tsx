@@ -1,5 +1,3 @@
-import { BrowserRouter, Routes, Route, Router, Navigate } from "react-router";
-import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 
 import HomePage from "./pages/Homepage";
@@ -11,12 +9,9 @@ import AppLayout from "./pages/AppLayout";
 import CityList from "./components/CityList";
 import CountryList from "./components/CountryList";
 import City from "./components/City";
-import { CitiesProvider } from "./contexts/CitiesProvider";
-
-import type { TCity } from "./types";
 import Form from "./components/Form";
 
-const BASE_URL = "http://localhost:8000";
+import { CitiesProvider } from "./contexts/CitiesProvider";
 
 function App() {
   return (

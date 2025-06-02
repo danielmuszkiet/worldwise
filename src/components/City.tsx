@@ -18,6 +18,7 @@ const formatDate = (date: string) =>
 
 function City({ cities }: CityProps) {
   const { id } = useParams();
+
   const pickedCity = cities.filter((c) => c.id === id)[0];
 
   const { cityName, emoji, date, notes, country } = pickedCity;

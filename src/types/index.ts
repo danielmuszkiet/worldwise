@@ -6,7 +6,7 @@ export type TCity = {
   notes: string;
   position: {
     lat: number;
-    lon: number;
+    lng: number;
   };
   id: string;
 };

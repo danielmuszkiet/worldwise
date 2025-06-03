@@ -29,8 +29,6 @@ function City() {
     [id]
   );
 
-  console.log(currentCity?.id, id);
-
   // Ensure the current city is fully loaded and matches the URL id,
   // otherwise old data may briefly appear.
   if (isLoading || !currentCity || currentCity.id !== id) return <Spinner />;

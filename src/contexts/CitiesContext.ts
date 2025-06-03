@@ -4,9 +4,9 @@ import type { TCity } from "../types";
 
 export type CitiesContextType = {
   cities: TCity[];
+  currentCity: TCity | undefined;
   isLoading: boolean;
-  setCities: React.Dispatch<React.SetStateAction<TCity[]>>;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  getCity: (id: string) => void;
 };
 
 export const CitiesContext = createContext<CitiesContextType | null>(null);

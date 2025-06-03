@@ -4,6 +4,7 @@ import styles from "./CityItem.module.css";
 
 import type { TCity } from "../types";
 import { Link } from "react-router";
+import { useCities } from "../contexts/useCities";
 
 type CityItem = {
   city: TCity;
@@ -17,11 +18,16 @@ const formatDate = (date: string) =>
   }).format(new Date(date));
 
 function CityItem({ city }: CityItem) {
+  const { currentCity } = useCities();
+
   const { emoji, cityName, date, id, country, position } = city;
 
   return (
     <li>
-      <Link to={`${id}?lat=${position.lat}&lng=${position.lng}`} className={styles.cityItem}>
+      <Link
+        to={`${id}?lat=${position.lat}&lng=${position.lng}`}
+        className={`${styles.cityItem} ${currentCity?.id === id ? styles["cityItem--active"] : ""}`}
+      >
         <span className={styles.emoji}>
           <CountryImage countrycode={emoji} size="h20" name={country} />
         </span>

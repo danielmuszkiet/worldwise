@@ -3,23 +3,39 @@ import { useParams } from "react-router";
 import styles from "./City.module.css";
 import CountryImage from "./CountryImage";
 import { useCities } from "../contexts/useCities";
+import { useEffect } from "react";
+import Spinner from "./Spinner";
+import BackButton from "./BackButton";
 
-const formatDate = (date: string) =>
-  new Intl.DateTimeFormat("en", {
+const formatDate = (date: string | null) => {
+  if (!date) return;
+
+  return new Intl.DateTimeFormat("en", {
     day: "numeric",
     month: "long",
     year: "numeric",
     weekday: "long",
   }).format(new Date(date));
+};
 
 function City() {
-  const { cities } = useCities();
-
   const { id } = useParams();
+  const { getCity, currentCity, isLoading } = useCities();
 
-  const pickedCity = cities.filter((c) => c.id === id)[0];
+  useEffect(
+    function () {
+      if (id) getCity(id);
+    },
+    [id]
+  );
 
-  const { cityName, emoji, date, notes, country } = pickedCity;
+  console.log(currentCity?.id, id);
+
+  // Ensure the current city is fully loaded and matches the URL id,
+  // otherwise old data may briefly appear.
+  if (isLoading || !currentCity || currentCity.id !== id) return <Spinner />;
+
+  const { cityName, emoji, date, notes, country } = currentCity;
 
   return (
     <div className={styles.city}>
@@ -27,7 +43,7 @@ function City() {
         <h6>City name</h6>
         <h3>
           <span>
-            <CountryImage countrycode={emoji} size="h24" name={country} />
+            <CountryImage countrycode={emoji || ""} size="h24" name={country} />
           </span>
           {cityName}
         </h3>
@@ -35,7 +51,7 @@ function City() {
 
       <div className={styles.row}>
         <h6>You went to {cityName} on</h6>
-        <p>{formatDate(date || "")}</p>
+        <p>{formatDate(date || null)}</p>
       </div>
 
       {notes && (
@@ -52,7 +68,9 @@ function City() {
         </a>
       </div>
 
-      <div>{/* <ButtonBack /> */}</div>
+      <div>
+        <BackButton />
+      </div>
     </div>
   );
 }

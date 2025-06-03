@@ -3,7 +3,7 @@ import styles from "./Button.module.css";
 type ButtonProps = {
   children: React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  type?: "primary" | "back";
+  type?: "primary" | "back" | "position";
 };
 
 function Button({ children, onClick, type = "primary" }: ButtonProps) {

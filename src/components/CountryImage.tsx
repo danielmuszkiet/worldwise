@@ -23,6 +23,7 @@ function CountryImage({ countrycode, size, name }: CountryImageProps) {
       src={getFlagImageUrlFromEmoji(countrycode, size)}
       alt={`Flag of ${name}`}
       style={{ borderRadius: "3px" }}
+      title={name}
     />
   );
 }

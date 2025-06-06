@@ -6,7 +6,7 @@ export type CitiesContextType = {
   currentCity: TCity | undefined;
   isLoading: boolean;
   getCity: (id: string) => void;
-  createCity: (newCity: Omit<TCity, "id">) => Promise<void>;
+  createCity: (newCity: TCity) => Promise<void>;
   removeCity: (id: string) => void;
 };
 

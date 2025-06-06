@@ -7,10 +7,22 @@ type CitiesProviderPops = {
   children: React.ReactNode;
 };
 
+const initalState = [
+  {
+    cityName: "Stuttgart",
+    country: "Germany",
+    emoji: "🇩🇪",
+    date: "Fri Jun 06 2025 15:16:07 GMT+0200 (Mitteleuropäische Sommerzeit)",
+    notes: "Here it all began...",
+    position: { lat: 48.77652485814117, lng: 9.179506301879885 },
+    id: "8FWFQ5GH+JR",
+  },
+];
+
 export function CitiesProvider({ children }: CitiesProviderPops) {
   const [isLoading, setIsLoading] = useState(false);
   const [currentCity, setCurrentCity] = useState<TCity | undefined>();
-  const [cities, setCities] = useLocalStorageState<TCity[]>([], "cities");
+  const [cities, setCities] = useLocalStorageState<TCity[]>(initalState, "cities");
 
   async function getCity(id: string) {
     try {
@@ -28,10 +40,10 @@ export function CitiesProvider({ children }: CitiesProviderPops) {
     // TODO
   }
 
-  async function createCity(newCity: Omit<TCity, "id">) {
+  async function createCity(newCity: TCity) {
     try {
       setIsLoading(true);
-      setCities((c) => [...c, { ...newCity, id: (c.length + 1).toString() }]);
+      setCities((c) => [...c, newCity]);
     } catch {
       alert("There was an error adding data...");
     } finally {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import styles from "./Form.module.css";
 import Button from "./Button";
@@ -34,6 +34,8 @@ function Form() {
 
   const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
 
+  const plusCode = useRef("");
+
   const navigate = useNavigate();
 
   const emoji = convertToEmoji(countryCode);
@@ -53,6 +55,7 @@ function Form() {
             "The selected location does not seem to be a city. Click somewhere else 🌏"
           );
 
+        plusCode.current = data.plusCode;
         setCityName(data.city || data.locality || "");
         setCountry(data.countryName || "");
         setCountryCode(data.countryCode);
@@ -82,6 +85,7 @@ function Form() {
       date: date.toString(),
       notes,
       position: { lat: mapLat, lng: mapLng },
+      id: plusCode.current,
     };
 
     await createCity(newCityObj);

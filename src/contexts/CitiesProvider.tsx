@@ -37,7 +37,14 @@ export function CitiesProvider({ children }: CitiesProviderPops) {
   }
 
   async function removeCity(id: string) {
-    setCities((prev) => prev.filter((c) => c.id !== id));
+    try {
+      setIsLoading(true);
+      setCities((prev) => prev.filter((c) => c.id !== id));
+    } catch {
+      alert("There was an error removing the city...");
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   async function createCity(newCity: TCity) {
@@ -45,7 +52,7 @@ export function CitiesProvider({ children }: CitiesProviderPops) {
       setIsLoading(true);
       setCities((c) => [...c, newCity]);
     } catch {
-      alert("There was an error adding data...");
+      alert("There was an error adding a city...");
     } finally {
       setIsLoading(false);
     }

@@ -18,6 +18,8 @@ function getFlagImageUrlFromEmoji(flag: string, size: string) {
 type CountryImageProps = { countrycode: string; size: string; name: string };
 
 function CountryImage({ countrycode, size, name }: CountryImageProps) {
+  if (!countrycode) return;
+
   return (
     <img
       src={getFlagImageUrlFromEmoji(countrycode, size)}

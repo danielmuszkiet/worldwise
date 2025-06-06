@@ -10,7 +10,7 @@
         "lat": 38.727881642324164,
         "lng": -9.140900099907554
       },
-      "id": 73930385
+      "id": "73930385"
     },
     {
       "cityName": "Madrid",
@@ -22,7 +22,7 @@
         "lat": 40.46635901755316,
         "lng": -3.7133789062500004
       },
-      "id": 17806751
+      "id": "17806751"
     },
     {
       "cityName": "Berlin",
@@ -34,7 +34,31 @@
         "lat": 52.53586782505711,
         "lng": 13.376933665713324
       },
-      "id": 98443197
+      "id": "98443197"
+    },
+    {
+      "id": "47e7",
+      "cityName": "Blaufelden",
+      "country": "Germany",
+      "emoji": "🇩🇪",
+      "date": "Fri Jun 06 2025 13:41:08 GMT+0200 (Mitteleuropäische Sommerzeit)",
+      "notes": "",
+      "position": {
+        "lat": 49.31376222923744,
+        "lng": 10.0360107421875
+      }
+    },
+    {
+      "id": "ce65",
+      "cityName": "Haßfurt",
+      "country": "Germany",
+      "emoji": "🇩🇪",
+      "date": "Fri Jun 06 2025 13:42:41 GMT+0200 (Mitteleuropäische Sommerzeit)",
+      "notes": "",
+      "position": {
+        "lat": 50.03223105362322,
+        "lng": 10.464477539062502
+      }
     }
   ]
 }

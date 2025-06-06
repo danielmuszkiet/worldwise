@@ -7,6 +7,7 @@ import { useUrlPosition } from "../hooks/useUrlPosition";
 import CountryImage from "./CountryImage";
 import Message from "./Message";
 import Spinner from "./Spinner";
+import { useCities } from "../contexts/useCities";
 
 function convertToEmoji(countryCode: string) {
   const codePoints = countryCode
@@ -19,12 +20,13 @@ function convertToEmoji(countryCode: string) {
 const BASE_URL = "https://api.bigdatacloud.net/data/reverse-geocode-client";
 
 function Form() {
+  const { createCity } = useCities();
   const [mapLat, mapLng] = useUrlPosition();
 
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
 
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState<Date | null>(new Date());
   const [notes, setNotes] = useState("");
   const [countryCode, setCountryCode] = useState("");
   const [geoCodingError, setGeoCodingError] = useState("");
@@ -34,6 +36,7 @@ function Form() {
   const emoji = convertToEmoji(countryCode);
 
   useEffect(() => {
+    if (!mapLat || !mapLng) return;
     async function fetchCityDate() {
       try {
         setIsLoadingGeocoding(true);
@@ -63,11 +66,29 @@ function Form() {
     fetchCityDate();
   }, [mapLat, mapLng]);
 
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    if (!cityName || !date) return;
+
+    const newCityObj = {
+      cityName,
+      country,
+      emoji,
+      date: date.toString(),
+      notes,
+      position: { lat: mapLat, lng: mapLng },
+    };
+
+    createCity(newCityObj);
+  }
+
   if (isLoadingGeocoding) return <Spinner />;
+  if (!mapLat || !mapLng) return <Message message="Start by clicking somewhere on the Map" />;
   if (geoCodingError) return <Message message={geoCodingError} />;
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.row}>
         <label htmlFor="cityName">City name</label>
         <input id="cityName" onChange={(e) => setCityName(e.target.value)} value={cityName} />
@@ -79,9 +100,10 @@ function Form() {
       <div className={styles.row}>
         <label htmlFor="date">When did you go to {cityName}?</label>
         <input
+          type="date"
           id="date"
           onChange={(e) => setDate(new Date(e.target.value))}
-          value={date.toDateString()}
+          value={date?.toISOString().split("T")[0]}
         />
       </div>
 

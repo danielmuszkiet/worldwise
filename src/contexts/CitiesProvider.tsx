@@ -44,6 +44,24 @@ export function CitiesProvider({ children }: CitiesProviderPops) {
     }
   }
 
+  async function removeCity(id: string) {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${BASE_URL}/cities/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+    } catch {
+      alert("There was an error removing data...");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   async function createCity(newCity: Omit<TCity, "id">) {
     try {
       setIsLoading(true);
@@ -55,16 +73,18 @@ export function CitiesProvider({ children }: CitiesProviderPops) {
         },
       });
       const data = await res.json();
-      console.log(data);
+      setCities((prev) => [...prev, data]);
     } catch {
-      alert("There was an error loading data...");
+      alert("There was an error adding data...");
     } finally {
       setIsLoading(false);
     }
   }
 
   return (
-    <CitiesContext.Provider value={{ cities, isLoading, currentCity, getCity, createCity }}>
+    <CitiesContext.Provider
+      value={{ cities, isLoading, currentCity, getCity, createCity, removeCity }}
+    >
       {children}
     </CitiesContext.Provider>
   );

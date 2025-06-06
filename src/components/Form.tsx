@@ -8,6 +8,7 @@ import CountryImage from "./CountryImage";
 import Message from "./Message";
 import Spinner from "./Spinner";
 import { useCities } from "../contexts/useCities";
+import { useNavigate } from "react-router";
 
 function convertToEmoji(countryCode: string) {
   const codePoints = countryCode
@@ -20,7 +21,7 @@ function convertToEmoji(countryCode: string) {
 const BASE_URL = "https://api.bigdatacloud.net/data/reverse-geocode-client";
 
 function Form() {
-  const { createCity } = useCities();
+  const { createCity, isLoading } = useCities();
   const [mapLat, mapLng] = useUrlPosition();
 
   const [cityName, setCityName] = useState("");
@@ -32,6 +33,8 @@ function Form() {
   const [geoCodingError, setGeoCodingError] = useState("");
 
   const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
+
+  const navigate = useNavigate();
 
   const emoji = convertToEmoji(countryCode);
 
@@ -66,7 +69,7 @@ function Form() {
     fetchCityDate();
   }, [mapLat, mapLng]);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (!cityName || !date) return;
@@ -80,7 +83,8 @@ function Form() {
       position: { lat: mapLat, lng: mapLng },
     };
 
-    createCity(newCityObj);
+    await createCity(newCityObj);
+    navigate("/app/cities");
   }
 
   if (isLoadingGeocoding) return <Spinner />;
@@ -88,7 +92,7 @@ function Form() {
   if (geoCodingError) return <Message message={geoCodingError} />;
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={`${styles.form} ${isLoading ? styles.loading : ""}`} onSubmit={handleSubmit}>
       <div className={styles.row}>
         <label htmlFor="cityName">City name</label>
         <input id="cityName" onChange={(e) => setCityName(e.target.value)} value={cityName} />

@@ -1,18 +1,6 @@
 {
   "cities": [
     {
-      "cityName": "Lisbon",
-      "country": "Portugal",
-      "emoji": "🇵🇹",
-      "date": "2027-10-31T15:59:59.138Z",
-      "notes": "My favorite city so far!",
-      "position": {
-        "lat": 38.727881642324164,
-        "lng": -9.140900099907554
-      },
-      "id": "73930385"
-    },
-    {
       "cityName": "Madrid",
       "country": "Spain",
       "emoji": "🇪🇸",
@@ -25,39 +13,15 @@
       "id": "17806751"
     },
     {
-      "cityName": "Berlin",
-      "country": "Germany",
-      "emoji": "🇩🇪",
-      "date": "2027-02-12T09:24:11.863Z",
-      "notes": "Amazing 😃",
+      "id": "e3fd",
+      "cityName": "Paris",
+      "country": "France",
+      "emoji": "🇫🇷",
+      "date": "Fri Jun 06 2025 14:13:16 GMT+0200 (Mitteleuropäische Sommerzeit)",
+      "notes": "It was amazing!",
       "position": {
-        "lat": 52.53586782505711,
-        "lng": 13.376933665713324
-      },
-      "id": "98443197"
-    },
-    {
-      "id": "47e7",
-      "cityName": "Blaufelden",
-      "country": "Germany",
-      "emoji": "🇩🇪",
-      "date": "Fri Jun 06 2025 13:41:08 GMT+0200 (Mitteleuropäische Sommerzeit)",
-      "notes": "",
-      "position": {
-        "lat": 49.31376222923744,
-        "lng": 10.0360107421875
-      }
-    },
-    {
-      "id": "ce65",
-      "cityName": "Haßfurt",
-      "country": "Germany",
-      "emoji": "🇩🇪",
-      "date": "Fri Jun 06 2025 13:42:41 GMT+0200 (Mitteleuropäische Sommerzeit)",
-      "notes": "",
-      "position": {
-        "lat": 50.03223105362322,
-        "lng": 10.464477539062502
+        "lat": 48.85222927070556,
+        "lng": 2.3510742187500004
       }
     }
   ]

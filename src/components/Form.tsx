@@ -48,7 +48,6 @@ function Form() {
         setGeoCodingError("");
         const res = await fetch(`${BASE_URL}?latitude=${mapLat}&longitude=${mapLng}`);
         const data = await res.json();
-        console.log(data);
 
         if (!data.countryCode)
           throw new Error(

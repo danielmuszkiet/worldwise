@@ -10,3 +10,11 @@ export type TCity = {
   };
   id: string;
 };
+
+// Action type
+export type Action =
+  | { type: "loading" }
+  | { type: "city/deleted"; payload: string }
+  | { type: "city/created"; payload: TCity }
+  | { type: "city/loaded"; payload: string }
+  | { type: "rejected"; payload: string };

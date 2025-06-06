@@ -18,13 +18,13 @@ const formatDate = (date: string) =>
   }).format(new Date(date));
 
 function CityItem({ city }: CityItem) {
-  const { currentCity, removeCity } = useCities();
+  const { currentCity, dispatch } = useCities();
 
   const { emoji, cityName, date, id, country, position } = city;
 
   function handleRemoveCity(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
-    removeCity(id);
+    dispatch({ type: "city/deleted", payload: id });
   }
 
   return (

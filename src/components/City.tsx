@@ -20,11 +20,11 @@ const formatDate = (date: string | null) => {
 
 function City() {
   const { id } = useParams();
-  const { getCity, currentCity, isLoading } = useCities();
+  const { dispatch, currentCity, isLoading } = useCities();
 
   useEffect(
     function () {
-      if (id) getCity(id);
+      if (id) dispatch({ type: "city/loaded", payload: id });
     },
     [id]
   );

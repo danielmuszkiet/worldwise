@@ -37,7 +37,7 @@ export function CitiesProvider({ children }: CitiesProviderPops) {
   }
 
   async function removeCity(id: string) {
-    // TODO
+    setCities((prev) => prev.filter((c) => c.id !== id));
   }
 
   async function createCity(newCity: TCity) {

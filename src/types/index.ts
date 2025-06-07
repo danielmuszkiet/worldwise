@@ -18,3 +18,10 @@ export type Action =
   | { type: "city/created"; payload: TCity }
   | { type: "city/loaded"; payload: string }
   | { type: "rejected"; payload: string };
+
+export type User = {
+  name: string;
+  email: string;
+  password: string;
+  avatar: string;
+};

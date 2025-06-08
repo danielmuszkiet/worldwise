@@ -3,10 +3,8 @@ import { useAuth } from "../contexts/useAuth";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
-  if (!isAuthenticated) {
-    return <Navigate to="/" />;
-  }
-  return isAuthenticated ? children : null;
+
+  return isAuthenticated ? children : <Navigate to="/" />;
 }
 
 export default ProtectedRoute;

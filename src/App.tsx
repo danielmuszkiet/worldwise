@@ -30,34 +30,69 @@ function App() {
     <AuthProvider>
       <CitiesProvider>
         <BrowserRouter>
-          <Suspense fallback={<SpinnerFullPage />}>
-            <Routes>
-              <Route index element={<HomePage />} />
-              <Route path="product" element={<Product />} />
-              <Route path="pricing" element={<Pricing />} />
-              <Route path="login" element={<Login />} />
+          <Routes>
+            <Route
+              index
+              element={
+                <Suspense fallback={<SpinnerFullPage />}>
+                  <HomePage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="product"
+              element={
+                <Suspense fallback={<SpinnerFullPage />}>
+                  <Product />
+                </Suspense>
+              }
+            />
+            <Route
+              path="pricing"
+              element={
+                <Suspense fallback={<SpinnerFullPage />}>
+                  <Pricing />
+                </Suspense>
+              }
+            />
+            <Route
+              path="login"
+              element={
+                <Suspense fallback={<SpinnerFullPage />}>
+                  <Login />
+                </Suspense>
+              }
+            />
 
-              <Route
-                path="app"
-                element={
-                  <ProtectedRoute>
+            <Route
+              path="app"
+              element={
+                <ProtectedRoute>
+                  <Suspense fallback={<SpinnerFullPage />}>
                     <AppLayout />
-                  </ProtectedRoute>
-                }
-              >
-                <Route index element={<Navigate to="cities" replace />} />
+                  </Suspense>
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Navigate to="cities" replace />} />
 
-                <Route path="cities" element={<CityList />} />
-                <Route path="cities/:id" element={<City />} />
+              <Route path="cities" element={<CityList />} />
+              <Route path="cities/:id" element={<City />} />
 
-                <Route path="countries" element={<CountryList />} />
+              <Route path="countries" element={<CountryList />} />
 
-                <Route path="form" element={<Form />} />
-              </Route>
+              <Route path="form" element={<Form />} />
+            </Route>
 
-              <Route path="*" element={<PageNotFound />} />
-            </Routes>
-          </Suspense>
+            <Route
+              path="*"
+              element={
+                <Suspense fallback={<SpinnerFullPage />}>
+                  <PageNotFound />
+                </Suspense>
+              }
+            />
+          </Routes>
         </BrowserRouter>
       </CitiesProvider>
     </AuthProvider>

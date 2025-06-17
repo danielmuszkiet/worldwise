@@ -26,7 +26,7 @@ function City() {
     function () {
       if (id) dispatch({ type: "city/loaded", payload: id });
     },
-    [id]
+    [id, dispatch]
   );
 
   // Ensure the current city is fully loaded and matches the URL id,
